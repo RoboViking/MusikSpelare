@@ -27,7 +27,7 @@ public class SongInfo {
 	}
 	
 	/**
-	 * returns the length of the song 
+	 * returns the length of the song to the struct
 	 */
 	private double songLength(File file) {
 		AudioInputStream inAudioStream = AudioSystem.getAudioInputStream(file); // gets an input stream of the file read
