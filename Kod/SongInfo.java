@@ -20,7 +20,7 @@ public class SongInfo {
 	private double length;
 	
 	public SongInfo(File file){
-		this.name = 
+		this.name = file.getName();
 		this.bandName =
 		this.path = file.getPath();
 		this.length = songLength(file);
@@ -38,6 +38,19 @@ public class SongInfo {
 		return time;
 	}
 	
+	private String returnName() {
+		return name;
+	}
 	
-
+	private String returnBandName() {
+		return bandName;
+	}
+	
+	private Path returnPath() {
+		return path;
+	}
+	
+	private double returnLength() {
+		return length;
+	}
 }
