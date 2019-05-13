@@ -6,6 +6,12 @@
  * @author oskar
  *
  */
+import java.io.*;
+import java.sound.sampeled.*;
+import java.nio.*;
+
+
+
 public class SongInfo {
 	
 	private String name;
