@@ -20,8 +20,8 @@ public class SongInfo {
 	private double length;
 	
 	public SongInfo(File file){
-		this.name = file.getName();
-		this.bandName =
+		this.name = getName(file);
+		this.bandName = getBandName(file);
 		this.path = file.getPath();
 		this.length = songLength(file);
 	}
@@ -36,6 +36,34 @@ public class SongInfo {
 		double time = (frames+0.0) / format.getFrameRate(); // gets the formats framerate (the number of frames played per second)
 															// and calculates the time of the song frames / framerate
 		return time;
+	}
+	
+	/**
+	 * returns the name of the song to the struct
+	 */
+	private String getName(File file) {
+		String temp = file.getName();
+		String[] temparr = temp.split(" ");
+		if(temparr.length > 0) {
+			return String[0];
+		}
+		else {
+			return "UnknownSong";
+		}
+	}
+	
+	/**
+	 * returns the bandname to the struct
+	 */
+	private String getBandName(File file) {
+		String temp = file.getName();
+		String[] temparr = temp.split(" ");
+		if(temparr.length > 1) {
+			return String[1];
+		}
+		else {
+			return "Unknown";
+		}
 	}
 	
 	private String returnName() {
