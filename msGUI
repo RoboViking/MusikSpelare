@@ -1,0 +1,217 @@
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import java.awt.GridLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import javax.swing.JTextField;
+import javax.swing.JScrollPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.FlowLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JList;
+import javax.swing.JTextArea;
+import javax.swing.JProgressBar;
+import javax.swing.JDesktopPane;
+
+public class msGUI extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField searchField;
+	public int progress = 0;
+	JPanel panel; 
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					msGUI frame = new msGUI();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public msGUI() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 600);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		GridBagLayout gbl_contentPane
+		= new GridBagLayout();
+		gbl_contentPane.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+		gbl_contentPane.rowHeights = new int[] { 0, 0, 0, 0 };
+		gbl_contentPane.columnWeights = new double[] { 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
+		gbl_contentPane.rowWeights = new double[] { 0.0, 0.0, 1.0, Double.MIN_VALUE };
+		contentPane.setLayout(gbl_contentPane);
+
+		JProgressBar progressBar = new JProgressBar();
+		GridBagConstraints gbc_progressBar = new GridBagConstraints();
+		gbc_progressBar.fill = GridBagConstraints.HORIZONTAL;
+		gbc_progressBar.gridwidth = 6;
+		gbc_progressBar.insets = new Insets(0, 0, 5, 0);
+		gbc_progressBar.gridx = 2;
+		gbc_progressBar.gridy = 1;
+
+		JButton btnStart = new JButton("Start");
+		btnStart.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println("Start");
+				progress += 5;
+				progressBar.setValue(progress);
+			}
+		});
+		GridBagConstraints gbc_btnStart = new GridBagConstraints();
+		gbc_btnStart.insets = new Insets(0, 0, 5, 5);
+		gbc_btnStart.gridx = 0;
+		gbc_btnStart.gridy = 0;
+		contentPane.add(btnStart, gbc_btnStart);
+
+		JButton btnStop = new JButton("Stop");
+		btnStop.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println("Stop");
+				progress -= 5;
+				progressBar.setValue(progress);
+			}
+		});
+		GridBagConstraints gbc_btnPaus = new GridBagConstraints();
+		gbc_btnPaus.insets = new Insets(0, 0, 5, 5);
+		gbc_btnPaus.gridx = 1;
+		gbc_btnPaus.gridy = 0;
+		contentPane.add(btnStop, gbc_btnPaus);
+
+		JButton btnLadda = new JButton("Ladda");
+		btnLadda.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println("Ladda");
+			}
+		});
+		GridBagConstraints gbc_btnLadda = new GridBagConstraints();
+		gbc_btnLadda.insets = new Insets(0, 0, 5, 5);
+		gbc_btnLadda.gridx = 2;
+		gbc_btnLadda.gridy = 0;
+		contentPane.add(btnLadda, gbc_btnLadda);
+
+		JButton btnSk = new JButton("S\u00F6k");
+		btnSk.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String userIn = searchField.getText();
+				System.out.println(userIn);
+			}
+		});
+		GridBagConstraints gbc_btnSk = new GridBagConstraints();
+		gbc_btnSk.insets = new Insets(0, 0, 5, 5);
+		gbc_btnSk.gridx = 3;
+		gbc_btnSk.gridy = 0;
+		contentPane.add(btnSk, gbc_btnSk);
+
+		searchField = new JTextField();
+		GridBagConstraints gbc_textField = new GridBagConstraints();
+		gbc_textField.gridwidth = 4;
+		gbc_textField.insets = new Insets(0, 0, 5, 0);
+		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField.gridx = 4;
+		gbc_textField.gridy = 0;
+		contentPane.add(searchField, gbc_textField);
+		searchField.setColumns(10);
+
+		JButton btnArtist = new JButton("Artist");
+		btnArtist.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println("Artist");
+			}
+		});
+		GridBagConstraints gbc_btnArtist = new GridBagConstraints();
+		gbc_btnArtist.insets = new Insets(0, 0, 5, 5);
+		gbc_btnArtist.gridx = 0;
+		gbc_btnArtist.gridy = 1;
+		contentPane.add(btnArtist, gbc_btnArtist);
+
+		JButton btnLt = new JButton("L\u00E5t");
+		btnLt.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println("Lot");
+			}
+		});
+		GridBagConstraints gbc_btnLt = new GridBagConstraints();
+		
+		gbc_btnLt.insets = new Insets(0, 0, 5, 5);
+		gbc_btnLt.gridx = 1;
+		gbc_btnLt.gridy = 1;
+		contentPane.add(btnLt, gbc_btnLt);
+
+		contentPane.add(progressBar, gbc_progressBar);
+		
+		panel = new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		GridBagConstraints gbc_panel = new GridBagConstraints();
+		gbc_panel.gridwidth = 8;
+		gbc_panel.insets = new Insets(0, 0, 0, 5);
+		gbc_panel.fill = GridBagConstraints.BOTH;
+		gbc_panel.gridx = 0;
+		gbc_panel.gridy = 2;
+		contentPane.add(panel, gbc_panel);
+
+		String[] songs = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" };	
+		addSongList(songs);
+	}
+	
+	private int cs;
+	private JButton[] songButtons;
+	private MouseAdapter[] songEvents;
+
+	public void addSongList(String[] songs) {
+		try {
+			cs = 0;
+			System.out.println(songs.length);
+			songButtons = new JButton[songs.length];
+			songEvents = new MouseAdapter[songs.length];
+
+			for (int i = 0; i < songs.length; i++) {
+				songEvents[i] = createMouseAdapter(songs[i]);
+			}
+
+			for (cs = 0; cs < songs.length; cs++) {
+				songButtons[cs] = new JButton(songs[cs]);
+				songButtons[cs].setBounds(10, 11 + (30 * cs), 89, 23);
+
+				songButtons[cs].addMouseListener(songEvents[cs]);
+				panel.add(songButtons[cs]);
+			}
+		} catch (Exception e) {
+			System.out.print(e);
+		}
+	}
+	public MouseAdapter createMouseAdapter(String s) {
+		return new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println(s);
+			}
+		};
+	}
+}
