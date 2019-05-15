@@ -7,8 +7,14 @@
  *
  */
 import java.io.*;
-import java.sound.sampeled.*;
-import java.nio.*;
+
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
+import java.nio.file.Path;
 
 
 
@@ -16,20 +22,24 @@ public class SongInfo {
 	
 	private String name;
 	private String bandName;
-	private Path path;
+	private String path;
 	private double length;
+	private Clip clip;
 	
-	public SongInfo(File file){
+	public SongInfo(File file) throws UnsupportedAudioFileException, IOException{
 		this.name = getName(file);
 		this.bandName = getBandName(file);
 		this.path = file.getPath();
 		this.length = songLength(file);
+		this.clip = getFileClip(file);
 	}
 	
 	/**
 	 * returns the length of the song to the struct
+	 * @throws IOException 
+	 * @throws UnsupportedAudioFileException 
 	 */
-	private double songLength(File file) {
+	private double songLength(File file) throws UnsupportedAudioFileException, IOException {
 		AudioInputStream inAudioStream = AudioSystem.getAudioInputStream(file); // gets an input stream of the file read
 		AudioFormat format = inAudioStream.getFormat(); // gets th files format 
 		long frames = inAudioStream.getFrameLength();	// gets the length of the file in frames rather than bytes
@@ -45,11 +55,27 @@ public class SongInfo {
 		String temp = file.getName();
 		String[] temparr = temp.split(" ");
 		if(temparr.length > 0) {
-			return String[0];
+			return temparr[0];
 		}
 		else {
 			return "UnknownSong";
 		}
+	}
+	
+	/**
+	 * returns a clip of the file
+	 * 
+	 */
+	private Clip getFileClip(File file) {
+		try {
+			Clip clip = AudioSystem.getClip();
+			clip.open(AudioSystem.getAudioInputStream(file));
+			return clip;
+		}
+		catch(Exception e) {
+			System.out.print("exception e");
+		}
+		return clip;
 	}
 	
 	/**
@@ -59,7 +85,7 @@ public class SongInfo {
 		String temp = file.getName();
 		String[] temparr = temp.split(" ");
 		if(temparr.length > 1) {
-			return String[1];
+			return temparr[1];
 		}
 		else {
 			return "Unknown";
@@ -74,7 +100,7 @@ public class SongInfo {
 		return bandName;
 	}
 	
-	private Path returnPath() {
+	private String returnPath() {
 		return path;
 	}
 	
