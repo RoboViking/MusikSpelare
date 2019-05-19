@@ -1,7 +1,7 @@
 /**
  * this class gets the song info
  * the information extracted is Name, Band, File path, Length
- * 
+ * la
  * 
  * @author oskar
  *
