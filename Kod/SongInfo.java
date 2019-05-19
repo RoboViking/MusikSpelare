@@ -73,19 +73,19 @@ public class SongInfo {
 		}
 	}
 	
-	private String returnName() {
+	public String returnName() {
 		return name;
 	}
 	
-	private String returnBandName() {
+	public String returnBandName() {
 		return bandName;
 	}
 	
-	private String returnPath() {
+	public String returnPath() {
 		return path;
 	}
 	
-	private double returnLength() {
+	public double returnLength() {
 		return length;
 	}
 }
