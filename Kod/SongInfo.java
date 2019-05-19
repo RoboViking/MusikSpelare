@@ -1,7 +1,7 @@
 /**
  * this class gets the song info
  * the information extracted is Name, Band, File path, Length
- * la
+ * 
  * 
  * @author oskar
  *
@@ -11,7 +11,6 @@ import java.io.*;
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 import java.nio.file.Path;
@@ -24,14 +23,12 @@ public class SongInfo {
 	private String bandName;
 	private String path;
 	private double length;
-	private Clip clip;
 	
 	public SongInfo(File file) throws UnsupportedAudioFileException, IOException{
 		this.name = getName(file);
 		this.bandName = getBandName(file);
 		this.path = file.getPath();
 		this.length = songLength(file);
-		this.clip = getFileClip(file);
 	}
 	
 	/**
@@ -60,22 +57,6 @@ public class SongInfo {
 		else {
 			return "UnknownSong";
 		}
-	}
-	
-	/**
-	 * returns a clip of the file
-	 * 
-	 */
-	private Clip getFileClip(File file) {
-		try {
-			Clip clip = AudioSystem.getClip();
-			clip.open(AudioSystem.getAudioInputStream(file));
-			return clip;
-		}
-		catch(Exception e) {
-			System.out.print("exception e");
-		}
-		return clip;
 	}
 	
 	/**
