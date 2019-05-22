@@ -6,7 +6,7 @@ import java.util.Comparator;
  */
 public class ComparatorName implements Comparator<SongInfo>{
 	/**
-	 * compares the names of the songs
+	 * compares the name of the songs
 	 */
 	public int compare(SongInfo arg0, SongInfo arg1) {
 		String name1 = arg0.returnName();
