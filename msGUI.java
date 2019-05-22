@@ -92,19 +92,6 @@ public class msGUI extends JFrame {
 			}
 		});
 
-		/////////////////////////// Load ///////////////
-//		JButton btnLadda = new JButton("Ladda");
-//		btnLadda.addMouseListener(new MouseAdapter() {
-//			@Override
-//			public void mouseClicked(MouseEvent e) {
-//				Backend.playlist = new ArrayList<String>();
-//				Backend.currentSong = 0;
-//				songButtons = new JButton[0];
-//				songEvents = new MouseAdapter[0];
-//				revalidate();
-//				Backend.addMusicToHash();
-//			}
-//		});
 		/////////////////////////// Stop ///////////////
 		JButton btnStop = new JButton("Stop");
 		btnStop.addMouseListener(new MouseAdapter() {
@@ -136,11 +123,19 @@ public class msGUI extends JFrame {
 		gbc_btnStop.gridy = 0;
 		contentPane.add(btnStop, gbc_btnStop);
 
-//		GridBagConstraints gbc_btnLadda = new GridBagConstraints();
-//		gbc_btnLadda.insets = new Insets(0, 0, 5, 5);
-//		gbc_btnLadda.gridx = 3;
-//		gbc_btnLadda.gridy = 0;
-//		contentPane.add(btnLadda, gbc_btnLadda);
+		JButton btnNext = new JButton("Next Song");
+		btnNext.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				SongPlayer.stopSong();
+			}
+		});
+		GridBagConstraints gbc_btnNext = new GridBagConstraints();
+		gbc_btnNext.insets = new Insets(0, 0, 5, 5);
+		gbc_btnNext.gridx = 3;
+		gbc_btnNext.gridy = 0;
+		contentPane.add(btnNext, gbc_btnNext);
 		GridBagConstraints gbc_btnSk = new GridBagConstraints();
 		gbc_btnSk.insets = new Insets(0, 0, 5, 5);
 		gbc_btnSk.gridx = 4;
