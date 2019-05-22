@@ -4,7 +4,12 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineEvent;
-
+/**
+*
+*
+* @author 
+*
+*/
 public class SongPlayer {
 	private static Clip clip;
 	private static AudioInputStream stream;
