@@ -1,7 +1,7 @@
 import java.util.Comparator;
 /**
  * 
- * @author 
+ * @author Oskar de la Vaux, Fabian Henrysson, Willian Wahlberg
  *
  */
 public class ComparatorName implements Comparator<SongInfo>{
