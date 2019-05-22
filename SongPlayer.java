@@ -7,7 +7,7 @@ import javax.sound.sampled.LineEvent;
 /**
 *
 *
-* @author 
+* @author Oskar de la Vaux, Fabian Henrysson, Willian Wahlberg
 *
 */
 public class SongPlayer {
