@@ -3,7 +3,7 @@
  * the information extracted is Name, Band, File path, Length
  * 
  * 
- * @author oskar
+ * @author Oskar de la Vaux, Fabian Henrysson, Willian Wahlberg
  *
  */
 import java.io.*;
