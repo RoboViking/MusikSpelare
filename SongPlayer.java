@@ -4,12 +4,7 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineEvent;
-/**
-*
-*
-* @author Oskar de la Vaux, Fabian Henrysson, Willian Wahlberg
-*
-*/
+
 public class SongPlayer {
 	private static Clip clip;
 	private static AudioInputStream stream;
@@ -55,7 +50,7 @@ public class SongPlayer {
 	}
 
 	/**
-	 * pauses song
+	 * pauses song§§
 	 */
 	public static void pauseSong() {
 		try {

@@ -8,6 +8,9 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JTextField;
+import javax.swing.UIDefaults;
+import javax.swing.UIManager;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -24,11 +27,12 @@ public class msGUI extends JFrame {
 	public static boolean SortBySong;
 
 	/**
-	 * Create the frame.
+	 * Create the Jframe with buttons to controll the music player
 	 */
 	public msGUI() {
+		setTitle("Meme Player");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 500, 600);
+		setBounds(100, 100, 576, 690);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -38,9 +42,10 @@ public class msGUI extends JFrame {
 		gbl_contentPane.columnWeights = new double[] { 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
 		gbl_contentPane.rowWeights = new double[] { 0.0, 0.0, 1.0, Double.MIN_VALUE };
 		contentPane.setLayout(gbl_contentPane);
-		
-/////////////////////////// Spelar upp musik i playlist ///////////////		
 
+		contentPane.setBackground(Color.DARK_GRAY);
+		
+/////////////////////////// Start ///////////////		
 		JButton btnStart = new JButton("Start");
 		btnStart.addMouseListener(new MouseAdapter() {
 			@Override
@@ -91,6 +96,21 @@ public class msGUI extends JFrame {
 				}
 			}
 		});
+		GridBagConstraints gbc_btnSk = new GridBagConstraints();
+		gbc_btnSk.insets = new Insets(0, 0, 5, 5);
+		gbc_btnSk.gridx = 4;
+		gbc_btnSk.gridy = 0;
+		contentPane.add(btnSk, gbc_btnSk);
+		
+		searchField = new JTextField();
+		GridBagConstraints gbc_textField = new GridBagConstraints();
+		gbc_textField.anchor = GridBagConstraints.EAST;
+		gbc_textField.gridwidth = 3;
+		gbc_textField.insets = new Insets(0, 0, 5, 0);
+		gbc_textField.gridx = 5;
+		gbc_textField.gridy = 0;
+		contentPane.add(searchField, gbc_textField);
+		searchField.setColumns(10);
 
 		/////////////////////////// Stop ///////////////
 		JButton btnStop = new JButton("Stop");
@@ -102,6 +122,12 @@ public class msGUI extends JFrame {
 				SongPlayer.stopSong();
 			}
 		});
+		GridBagConstraints gbc_btnStop = new GridBagConstraints();
+		gbc_btnStop.insets = new Insets(0, 0, 5, 5);
+		gbc_btnStop.gridx = 2;
+		gbc_btnStop.gridy = 0;
+		contentPane.add(btnStop, gbc_btnStop);
+
 		/////////////////////////// Pause ///////////////
 		JButton btnPaus = new JButton("Paus");
 		btnPaus.addMouseListener(new MouseAdapter() {
@@ -117,17 +143,12 @@ public class msGUI extends JFrame {
 		gbc_btnPaus.gridy = 0;
 		contentPane.add(btnPaus, gbc_btnPaus);
 
-		GridBagConstraints gbc_btnStop = new GridBagConstraints();
-		gbc_btnStop.insets = new Insets(0, 0, 5, 5);
-		gbc_btnStop.gridx = 2;
-		gbc_btnStop.gridy = 0;
-		contentPane.add(btnStop, gbc_btnStop);
-
+		/////////////////////////// Next song ///////////////
 		JButton btnNext = new JButton("Next Song");
 		btnNext.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+
 				SongPlayer.stopSong();
 			}
 		});
@@ -136,21 +157,6 @@ public class msGUI extends JFrame {
 		gbc_btnNext.gridx = 3;
 		gbc_btnNext.gridy = 0;
 		contentPane.add(btnNext, gbc_btnNext);
-		GridBagConstraints gbc_btnSk = new GridBagConstraints();
-		gbc_btnSk.insets = new Insets(0, 0, 5, 5);
-		gbc_btnSk.gridx = 4;
-		gbc_btnSk.gridy = 0;
-		contentPane.add(btnSk, gbc_btnSk);
-
-		searchField = new JTextField();
-		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.anchor = GridBagConstraints.EAST;
-		gbc_textField.gridwidth = 3;
-		gbc_textField.insets = new Insets(0, 0, 5, 0);
-		gbc_textField.gridx = 5;
-		gbc_textField.gridy = 0;
-		contentPane.add(searchField, gbc_textField);
-		searchField.setColumns(10);
 
 		/////////////////////////// sortera enligt artist ///////////////
 		JButton btnArtist = new JButton("Artist");
@@ -160,7 +166,7 @@ public class msGUI extends JFrame {
 				SortByArtist = true;
 				SortBySong = false;
 
-				loadSongs();
+				ResetAndAddMusic();
 			}
 		});
 		GridBagConstraints gbc_btnArtist = new GridBagConstraints();
@@ -177,7 +183,7 @@ public class msGUI extends JFrame {
 				SortByArtist = false;
 				SortBySong = true;
 
-				loadSongs();
+				ResetAndAddMusic();
 			}
 		});
 		GridBagConstraints gbc_btnLt = new GridBagConstraints();
@@ -186,9 +192,13 @@ public class msGUI extends JFrame {
 		gbc_btnLt.gridx = 1;
 		gbc_btnLt.gridy = 1;
 		contentPane.add(btnLt, gbc_btnLt);
-
+		
+		
+		
+		// JPanel for music buttons
 		panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		panel.setBackground(Color.GRAY);
 		GridBagConstraints gbc_panel = new GridBagConstraints();
 		gbc_panel.gridwidth = 8;
 		gbc_panel.fill = GridBagConstraints.BOTH;
@@ -196,14 +206,16 @@ public class msGUI extends JFrame {
 		gbc_panel.gridy = 2;
 		contentPane.add(panel, gbc_panel);
 	}
-
-	public void loadSongs() {
+	
+	public void ResetAndAddMusic() {
 		Backend.playlist = new ArrayList<String>();
 		Backend.currentSong = 0;
 		songButtons = new JButton[0];
 		songEvents = new MouseAdapter[0];
 		revalidate();
-		Backend.addMusicToHash();
+		ArrayList<SongInfo> list = Backend.addMusicToHash();
+		Backend.addButtons(list);
+
 	}
 
 	private int cs;
@@ -211,11 +223,11 @@ public class msGUI extends JFrame {
 	public static MouseAdapter[] songEvents;
 	public boolean[] buttonState;
 	static String[] buttonText;
-
+	
 	/**
-	 * @wbp.nonvisual location=-34,108
+	 * Adds a list of buttons to panel
+	 * @param ArrayList of songInfo
 	 */
-
 	public void addSongList(ArrayList<SongInfo> songs) {
 		try {
 
@@ -226,12 +238,11 @@ public class msGUI extends JFrame {
 			buttonText = new String[songs.size()];
 			panel.removeAll();
 
-			for (int i = 0; i < songs.size(); i++) {
-				buttonText[i] = songs.get(i).returnName();
-				songEvents[i] = createMouseAdapter(songs.get(i), i);
-			}
-
 			for (cs = 0; cs < songs.size(); cs++) {
+
+				buttonText[cs] = songs.get(cs).returnName();
+				songEvents[cs] = createMouseAdapter(songs.get(cs), cs);
+
 				String name = songs.get(cs).returnName() + "  " + songs.get(cs).returnBandName();
 				songButtons[cs] = new JButton(name.replace(".Wav", ""));
 				songButtons[cs].setBounds(10, 11 + (30 * cs), 89, 23);

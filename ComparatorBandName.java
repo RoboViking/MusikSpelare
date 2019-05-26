@@ -1,12 +1,12 @@
 import java.util.Comparator;
 /**
  * 
- * @author Oskar de la Vaux, Fabian Henrysson, Willian Wahlberg
+ * @author Oskar de la Vaux
  *
  */
 public class ComparatorBandName implements Comparator<SongInfo>{
 	/**
-	 * compares the band name of the song
+	 * compares the names of the countries
 	 */
 	public int compare(SongInfo arg0, SongInfo arg1) {
 		String name1 = arg0.returnBandName();

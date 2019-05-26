@@ -3,7 +3,7 @@
  * the information extracted is Name, Band, File path, Length
  * 
  * 
- * @author Oskar de la Vaux, Fabian Henrysson, Willian Wahlberg
+ * @author oskar
  *
  */
 import java.io.*;
@@ -12,8 +12,6 @@ import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
-
-import java.nio.file.Path;
 
 
 
@@ -72,27 +70,19 @@ public class SongInfo {
 			return "Unknown";
 		}
 	}
-	/**
-	 * returns the name to the method clling
-	 */
+	
 	public String returnName() {
 		return name;
 	}
-	/**
-	 * returns the band name to the method clling
-	 */
+	
 	public String returnBandName() {
 		return bandName;
 	}
-	/**
-	 * returns the path to the method clling
-	 */
+	
 	public String returnPath() {
 		return path;
 	}
-	/**
-	 * returns the song length to the method clling
-	 */
+	
 	public double returnLength() {
 		return length;
 	}

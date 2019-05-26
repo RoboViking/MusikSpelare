@@ -4,14 +4,14 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Hashtable;
-
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JButton;
 
 public class Backend {
+
+
 	static msGUI frame;
-	public static Hashtable<String, SongInfo> library;
+	public static HashTable library;
 	public static ArrayList<String> playlist;
 	public static int currentSong;
 	public static boolean currentlyPlaying;
@@ -30,17 +30,21 @@ public class Backend {
 					currentSong = 0;
 					msGUI.songButtons = new JButton[0];
 					msGUI.songEvents = new MouseAdapter[0];
-					addMusicToHash();
-				
+					ArrayList<SongInfo> list = addMusicToHash();
+					addButtons(list);
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
 	}
-
-	public static void addMusicToHash() {
-		library = new Hashtable<String, SongInfo>();
+/**
+ * Filles up library with songs from musik folder
+ * @return Arraylist filled with songInfo object
+ */
+	public static ArrayList<SongInfo> addMusicToHash() {
+		library = new HashTable();
 		playlist = new ArrayList<String>();
 		File folder = new File("Musik");
 		File[] listOfFiles = folder.listFiles();
@@ -58,17 +62,30 @@ public class Backend {
 				}
 			}
 		}
+		return wavs;
+	}
+/**
+ * Sorts buttons and calls addSongList
+ * @param Arraylist<SongInfo>
+ */
+	public static void addButtons(ArrayList<SongInfo> wavs) {
 		if (msGUI.SortBySong)
 			Collections.sort(wavs, new ComparatorName());
 		if (msGUI.SortByArtist)
 			Collections.sort(wavs, new ComparatorBandName());
 		frame.addSongList(wavs);
 	}
-
+/**
+ * adds path to a wav file as string in to playlist
+ * @param path to wav file as string
+ */
 	public static void addMusicToPlaylist(String song) {
 		playlist.add(song);
 	}
-
+/**
+ * removes string from playlist
+ * @param string to be removed
+ */
 	public static void removeMusicFromPlaylist(String song) {
 		for (int i = 0; i < playlist.size(); i++) {
 			if (playlist.get(i).equals(song)) {
@@ -76,7 +93,9 @@ public class Backend {
 			}
 		}
 	}
-
+/**
+ * plays next song in playlist
+ */
 	public static void playNext() {
 		currentSong++;
 		if (currentSong == playlist.size())
